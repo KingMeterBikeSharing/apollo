@@ -364,7 +364,7 @@ CREATE TABLE `ServerConfig` (
 # ------------------------------------------------------------
 INSERT INTO `ServerConfig` (`Key`, `Cluster`, `Value`, `Comment`)
 VALUES
-    ('eureka.service.url', 'default', 'http://localhost:8080/eureka/', 'Eureka服务Url，多个service以英文逗号分隔'),
+    ('eureka.service.url', 'default', 'http://47.92.38.164:5002/eureka/', 'Eureka服务Url，多个service以英文逗号分隔'),
     ('namespace.lock.switch', 'default', 'false', '一次发布只能有一个人修改开关'),
     ('item.value.length.limit', 'default', '20000', 'item value最大长度限制'),
     ('config-service.cache.enabled', 'default', 'false', 'ConfigService是否开启缓存，开启后能提高性能，但是会增大内存消耗！'),
@@ -374,19 +374,19 @@ VALUES
 # ------------------------------------------------------------
 INSERT INTO `App` (`AppId`, `Name`, `OrgId`, `OrgName`, `OwnerName`, `OwnerEmail`)
 VALUES
-	('SampleApp', 'Sample App', 'TEST1', '样例部门1', 'apollo', 'apollo@acme.com');
+	('bikesharing', 'bikesharing', 'bikesharing', 'bikesharing', 'apollo', 'apollo@acme.com');
 
 INSERT INTO `AppNamespace` (`Name`, `AppId`, `Format`, `IsPublic`, `Comment`)
 VALUES
-	('application', 'SampleApp', 'properties', 0, 'default app namespace');
+	('application', 'bikesharing', 'properties', 0, 'default app namespace');
 
 INSERT INTO `Cluster` (`Name`, `AppId`)
 VALUES
-	('default', 'SampleApp');
+	('default', 'bikesharing');
 
 INSERT INTO `Namespace` (`Id`, `AppId`, `ClusterName`, `NamespaceName`)
 VALUES
-	(1, 'SampleApp', 'default', 'application');
+	(1, 'bikesharing', 'default', 'application');
 
 
 INSERT INTO `Item` (`NamespaceId`, `Key`, `Value`, `Comment`, `LineNum`)
@@ -395,11 +395,11 @@ VALUES
 
 INSERT INTO `Release` (`ReleaseKey`, `Name`, `Comment`, `AppId`, `ClusterName`, `NamespaceName`, `Configurations`)
 VALUES
-	('20161009155425-d3a0749c6e20bc15', '20161009155424-release', 'Sample发布', 'SampleApp', 'default', 'application', '{\"timeout\":\"100\"}');
+	('20161009155425-d3a0749c6e20bc15', '20161009155424-release', 'Sample发布', 'bikesharing', 'default', 'application', '{\"timeout\":\"100\"}');
 
 INSERT INTO `ReleaseHistory` (`AppId`, `ClusterName`, `NamespaceName`, `BranchName`, `ReleaseId`, `PreviousReleaseId`, `Operation`, `OperationContext`, `DataChange_CreatedBy`, `DataChange_LastModifiedBy`)
 VALUES
-  ('SampleApp', 'default', 'application', 'default', 1, 0, 0, '{}', 'apollo', 'apollo');
+  ('bikesharing', 'default', 'application', 'default', 1, 0, 0, '{}', 'apollo', 'apollo');
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

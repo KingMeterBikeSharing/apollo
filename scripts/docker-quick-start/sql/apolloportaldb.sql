@@ -308,7 +308,7 @@ CREATE TABLE `Authorities` (
 INSERT INTO `ServerConfig` (`Key`, `Value`, `Comment`)
 VALUES
     ('apollo.portal.envs', 'dev', '可支持的环境列表'),
-    ('organizations', '[{\"orgId\":\"TEST1\",\"orgName\":\"样例部门1\"},{\"orgId\":\"TEST2\",\"orgName\":\"样例部门2\"}]', '部门列表'),
+    ('organizations', '[{\"orgId\":\"bikesharing\",\"orgName\":\"bikesharing\"}]', '部门列表'),
     ('superAdmin', 'apollo', 'Portal超级管理员'),
     ('api.readTimeout', '10000', 'http接口read timeout'),
     ('consumer.token.salt', 'someSalt', 'consumer token salt'),
@@ -325,25 +325,25 @@ INSERT INTO `Authorities` (`Username`, `Authority`) VALUES ('apollo', 'ROLE_user
 # ------------------------------------------------------------
 INSERT INTO `App` (`AppId`, `Name`, `OrgId`, `OrgName`, `OwnerName`, `OwnerEmail`)
 VALUES
-	('SampleApp', 'Sample App', 'TEST1', '样例部门1', 'apollo', 'apollo@acme.com');
+	('bikesharing', 'bikesharing', 'bikesharing', 'bikesharing', 'apollo', 'apollo@acme.com');
 
 INSERT INTO `AppNamespace` (`Name`, `AppId`, `Format`, `IsPublic`, `Comment`)
 VALUES
-	('application', 'SampleApp', 'properties', 0, 'default app namespace');
+	('application', 'bikesharing', 'properties', 0, 'default app namespace');
 
 INSERT INTO `Permission` (`Id`, `PermissionType`, `TargetId`)
 VALUES
-	(1, 'CreateCluster', 'SampleApp'),
-	(2, 'CreateNamespace', 'SampleApp'),
-	(3, 'AssignRole', 'SampleApp'),
-	(4, 'ModifyNamespace', 'SampleApp+application'),
-	(5, 'ReleaseNamespace', 'SampleApp+application');
+	(1, 'CreateCluster', 'bikesharing'),
+	(2, 'CreateNamespace', 'bikesharing'),
+	(3, 'AssignRole', 'bikesharing'),
+	(4, 'ModifyNamespace', 'bikesharing+application'),
+	(5, 'ReleaseNamespace', 'bikesharing+application');
 
 INSERT INTO `Role` (`Id`, `RoleName`)
 VALUES
-	(1, 'Master+SampleApp'),
-	(2, 'ModifyNamespace+SampleApp+application'),
-	(3, 'ReleaseNamespace+SampleApp+application');
+	(1, 'Master+bikesharing'),
+	(2, 'ModifyNamespace+bikesharing+application'),
+	(3, 'ReleaseNamespace+bikesharing+application');
 
 INSERT INTO `RolePermission` (`RoleId`, `PermissionId`)
 VALUES
