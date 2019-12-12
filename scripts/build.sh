@@ -1,20 +1,21 @@
 #!/bin/sh
 
-serverIp=47.92.38.164
+serverIp=127.0.0.1
 eurekaUrl=http://${serverIp}:5001
+mysqlIp=127.0.0.1
 configPort=5003
 adminPort=5004
 protalPort=5005
 
 # apollo config db info
-apollo_config_db_url=jdbc:mysql://${serverIp}:5002/ApolloConfigDB?characterEncoding=utf8
+apollo_config_db_url=jdbc:mysql://${mysqlIp}:3306/ApolloConfigDB?characterEncoding=utf8
 apollo_config_db_username=root
-apollo_config_db_password=CrazyAndyIsFine.007
+apollo_config_db_password=kingmeter
 
 # apollo portal db info
-apollo_portal_db_url=jdbc:mysql://${serverIp}:5002/ApolloPortalDB?characterEncoding=utf8
+apollo_portal_db_url=jdbc:mysql://${mysqlIp}:3306/ApolloPortalDB?characterEncoding=utf8
 apollo_portal_db_username=root
-apollo_portal_db_password=CrazyAndyIsFine.007
+apollo_portal_db_password=kingmeter
 
 # meta server url, different environments should have different meta server addresses
 dev_meta=http://${serverIp}:${configPort}
@@ -39,7 +40,7 @@ echo "==== building config-service and admin-service finished ===="
 
 echo "==== starting to build portal ===="
 
-mvn clean package -DskipTests -pl apollo-portal -am -Dapollo_profile=github,auth -Dspring_datasource_url=$apollo_portal_db_url -Dspring_datasource_username=$apollo_portal_db_username -Dspring_datasource_password=$apollo_portal_db_password $META_SERVERS_OPTS
+mvn clean package -DskipTests -pl apollo-portal -am -Dapollo_profile=github,auth -Dspring_datasource_url=$apollo_portal_db_url -Dspring_datasource_username=$apollo_portal_db_username -Dspring_datasource_password=$apollo_portal_db_password $META_SERVERS_OPTS -DprotalPort=$protalPort
 
 echo "==== building portal finished ===="
 
